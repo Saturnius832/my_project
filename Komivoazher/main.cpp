@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <vector>
 #include <numeric>
 #include <algorithm>
@@ -38,7 +38,7 @@ public:
         }
     }
 
-    // Точный алгоритм (полный перебор)
+    // РўРѕС‡РЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј (РїРѕР»РЅС‹Р№ РїРµСЂРµР±РѕСЂ)
     TspResult solveExact(int startCity, bool findWorst = false) const {
         auto startTime = high_resolution_clock::now();
         vector<int> citiesToVisit;
@@ -74,7 +74,7 @@ public:
         return { extremeCost, fullPath, durationMs.count() };
     }
 
-    // Жадный алгоритм (ближайший сосед)
+    // Р–Р°РґРЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј (Р±Р»РёР¶Р°Р№С€РёР№ СЃРѕСЃРµРґ)
     TspResult solveHeuristicNearestNeighbor(int startCity) const {
         auto startTime = high_resolution_clock::now();
         vector<bool> visited(cityCount, false);
