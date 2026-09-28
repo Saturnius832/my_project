@@ -22,16 +22,16 @@ private:
 
 public:
     TravelingSalesperson(int n) : cityCount(n) {
-        costMatrix.assign(n, vector<int>(n, 0));
+        costMatrix.assign(n, vector<int>(n, 0)); //Создаётся матрица n × n, заполненная нулями.
     }
 
     void generateRandomCosts(int minCost, int maxCost) {
         random_device rd;
         mt19937 gen(rd());
         uniform_int_distribution<> dist(minCost, maxCost);
-        for (int i = 0; i < cityCount; ++i) {
-            for (int j = 0; j < cityCount; ++j) {
-                if (i != j) {
+        for (int i = 0; i < cityCount; ++i) { //перебираем строки матрицы
+            for (int j = 0; j < cityCount; ++j) { //перебираем столбцы матрицы
+                if (i != j) { 
                     costMatrix[i][j] = dist(gen);
                 }
             }
@@ -40,7 +40,7 @@ public:
 
     // Точный алгоритм (полный перебор)
     TspResult solveExact(int startCity, bool findWorst = false) const {
-        auto startTime = high_resolution_clock::now();
+        auto startTime = high_resolution_clock::now();//засечение времен
         vector<int> citiesToVisit;
         for (int i = 0; i < cityCount; ++i) {
             if (i != startCity) citiesToVisit.push_back(i);
@@ -111,7 +111,7 @@ public:
     }
 };
 
-void runExperiments(int cityCount, int minCost, int maxCost, int startCity, int runNumber) {
+void runExperiments(int cityCount, int minCost, int maxCost, int startCity, int runNumber) { //кол-во городов, мин стоимость, макс стоимость, стартовый город, номер запуска//
     TravelingSalesperson tsp(cityCount);
     tsp.generateRandomCosts(minCost, maxCost);
 
