@@ -84,7 +84,17 @@ bool DeikstraWhile(vector<int>& P) {
         j--;
     }
 
+    cout << "До: ";
+    for (int x : P)
+        cout << x << " ";
+    cout << endl;
+
     swap(P[i], P[j]);
+
+    cout << "После обмена: ";
+    for (int x : P)
+        cout << x << " ";
+    cout << endl;
 
     int left = i + 1;
     int right = n - 1;
@@ -94,6 +104,11 @@ bool DeikstraWhile(vector<int>& P) {
         left++;
         right--;
     }
+
+    cout << "После разворота: ";
+    for (int x : P)
+        cout << x << " ";
+    cout << endl;
 
     return true;
 }
