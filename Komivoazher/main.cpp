@@ -5,6 +5,7 @@
 #include <random>
 #include <chrono>
 #include <iomanip>
+#include<algorithm>
 
 using namespace std;
 using namespace std::chrono;
@@ -16,41 +17,34 @@ struct TspResult {
 };
 
 // алгоритм построения следующей перестановки
+
 bool Deikstra(vector<int>& P) {
     int n = P.size();
+    int i;
 
-    // 1. Находим максимальное значение i такое, что P[i] < P[i+1]
-    int i = n - 2;
-
-    while (i >= 0 && P[i] >= P[i + 1]) {
-        i--;
+    // 1. Ищем i справа налево
+    for (i = n - 2; i >= 0; i--) {
+        if (P[i] < P[i + 1]) {
+            break;
+        }
     }
 
-    // Если такого i не существует, перестановок больше нет
-    if (i < 0) {
+    if (i < 0) 
         return false;
+    
+    // 2. Ищем j справа от i
+    int j;
+    for (j = n - 1; j > i; j--) {
+        if (P[i] < P[j]) {
+            break;
+        }
     }
 
-    // 2. Находим максимальное значение j такое, что P[i] < P[j]
-    int j = n - 1;
-
-    while (P[i] >= P[j]) {
-        j--;
-    }
-
-    // 3. Меняем P[i] и P[j] местами
+    // 3. Меняем элементы местами
     swap(P[i], P[j]);
 
-    // 4. Упорядочиваем хвост по возрастанию
-    // (инвертируем порядок)
-    int left = i + 1;
-    int right = n - 1;
-
-    while (left < right) {
-        swap(P[left], P[right]);
-        left++;
-        right--;
-    }
+    // 4. Разворачиваем хвост
+    reverse(P.begin() + i + 1, P.end());
 
     return true;
 }
