@@ -18,21 +18,19 @@ struct TspResult {
 
 // алгоритм построения следующей перестановки
 
-bool Deikstra(vector<int>& P) {
+bool Deikstra(vector<int>& P, bool show = false) {
     int n = P.size();
     int i;
 
-    // 1. Ищем i справа налево
     for (i = n - 2; i >= 0; i--) {
         if (P[i] < P[i + 1]) {
             break;
         }
     }
 
-    if (i < 0) 
+    if (i < 0)
         return false;
-    
-    // 2. Ищем j справа от i
+
     int j;
     for (j = n - 1; j > i; j--) {
         if (P[i] < P[j]) {
@@ -40,15 +38,65 @@ bool Deikstra(vector<int>& P) {
         }
     }
 
-    // 3. Меняем элементы местами
+    if (show) {
+        cout << "До: ";
+        for (int x : P)
+            cout << x << " ";
+        cout << endl;
+    }
+
     swap(P[i], P[j]);
 
-    // 4. Разворачиваем хвост
+    if (show) {
+        cout << "После обмена: ";
+        for (int x : P)
+            cout << x << " ";
+        cout << endl;
+    }
+
     reverse(P.begin() + i + 1, P.end());
+
+    if (show) {
+        cout << "После разворота: ";
+        for (int x : P)
+            cout << x << " ";
+        cout << endl;
+    }
 
     return true;
 }
 
+bool DeikstraWhile(vector<int>& P) {
+    int n = P.size();
+
+    int i = n - 2;
+
+    while (i >= 0 && P[i] >= P[i + 1]) {
+        i--;
+    }
+
+    if (i < 0)
+        return false;
+
+    int j = n - 1;
+
+    while (P[i] >= P[j]) {
+        j--;
+    }
+
+    swap(P[i], P[j]);
+
+    int left = i + 1;
+    int right = n - 1;
+
+    while (left < right) {
+        swap(P[left], P[right]);
+        left++;
+        right--;
+    }
+
+    return true;
+}
 void generateRandomCosts(
     vector<vector<int>>& costMatrix,
     int cityCount,
@@ -228,10 +276,33 @@ void runExperiments(
 }
 
 int main() {
-
+    setlocale(LC_ALL, "Rus");
     int startCity = 0;
     int sizes[] = { 4, 6, 8, 10, 11, 12 };
 
+
+    vector<int> test1 = { 3, 4, 6, 2, 1, 5, 7 };
+    vector<int> test2 = test1;
+
+    cout << "Первый алгоритм:\n";
+    Deikstra(test1, true);
+
+    cout << "\nВторой алгоритм:\n";
+    DeikstraWhile(test2);
+
+    cout << "Результат 1: ";
+    for (int x : test1)
+        cout << x << " ";
+
+    cout << "\nРезультат 2: ";
+    for (int x : test2)
+        cout << x << " ";
+
+    
+    
+    
+    cout << "\n";
+    
     cout << "Test 1. Costs from 10 to 100\n\n";
 
     for (int size : sizes) {
