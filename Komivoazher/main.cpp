@@ -304,8 +304,8 @@ int main() {
 
     cout << "\nВторой алгоритм:\n";
     DeikstraWhile(test2);
-
-    cout << "Результат 1: ";
+    
+    cout << "\nРезультат 1: ";
     for (int x : test1)
         cout << x << " ";
 
