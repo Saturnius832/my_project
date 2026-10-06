@@ -66,7 +66,7 @@ bool Deikstra(vector<int>& P, bool show = false) {
     return true;
 }
 
-bool DeikstraWhile(vector<int>& P) {
+bool DeikstraWhile(vector<int>& P) { //Алгоритм Дейкстра через while
     int n = P.size();
 
     int i = n - 2;
@@ -296,7 +296,7 @@ int main() {
     int sizes[] = { 4, 6, 8, 10, 11, 12 };
 
 
-    vector<int> test1 = { 3, 4, 6, 2, 1, 5, 7 };
+    vector<int> test1 = { 3, 4, 6, 2, 1, 5, 7, };
     vector<int> test2 = test1;
 
     cout << "Первый алгоритм:\n";
