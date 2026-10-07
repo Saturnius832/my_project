@@ -17,7 +17,6 @@ public:
     bool isOnOx() const;
     bool isOnOy() const;
     bool isOnOz() const;
-
     int getOctant() const;
 
     bool isSymmetricToOrigin(const Point& point) const;
