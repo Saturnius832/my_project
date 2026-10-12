@@ -84,7 +84,7 @@ int Point::getOctant() const
 }
 
 bool Point::isSymmetricToOrigin(const Point& point) const
-{
+{ 
     return x_ == -point.x_ &&
         y_ == -point.y_ &&
         z_ == -point.z_;
@@ -113,17 +113,17 @@ bool Point::isSymmetricToYOZ(const Point& point) const
 
 double Point::getDistanceFromOrigin() const
 {
-    return std::sqrt(x_ * x_ + y_ * y_ + z_ * z_);
+    return std::sqrt(x_ * x_ + y_ * y_ + z_ * z_); //базовая формула: корень x^2 + y^2 + z^2
 }
 
-bool Point::operator==(const Point& point) const
+bool Point::operator==(const Point& point) const // определеяем как, две точки сравнивать
 {
     return x_ == point.x_ &&
         y_ == point.y_ &&
         z_ == point.z_;
 }
 
-Point Point::operator*(double number) const
+Point Point::operator*(double number) const //опр умножение точки на число
 {
     return Point(x_ * number,
         y_ * number,

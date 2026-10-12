@@ -1,77 +1,80 @@
-#include "Point.h"
 
+#include "Point.h"
 #include <iostream>
+#include<locale.h>
 
 int main()
 {
+    setlocale(LC_ALL, "Rus");
     Point point1(3, 4, 5);
     Point point2(-3, -4, -5);
-
-    std::cout << "Point 1: ";
+ 
+    std::cout << "Точка 1: ";
     point1.output();
-
-    std::cout << "\nPoint 2: ";
+    std::cout << "\nТочка 2: ";
     point2.output();
     std::cout << "\n\n";
 
-    std::cout << "X: " << point1.getX() << "\n";
-    std::cout << "Y: " << point1.getY() << "\n";
-    std::cout << "Z: " << point1.getZ() << "\n";
+    std::cout << "Координата X: " << point1.getX() << "\n";
+    std::cout << "Координата Y: " << point1.getY() << "\n";
+    std::cout << "Координата Z: " << point1.getZ() << "\n";
 
     std::cout << "\n";
 
-    std::cout << "Point 1 is on Ox: "
+    std::cout << "Точка 1 лежит на оси Ox: "
         << point1.isOnOx() << "\n";
 
-    std::cout << "Point 1 is on Oy: "
+    std::cout << "Точка 1 лежит на оси Oy: "
         << point1.isOnOy() << "\n";
 
-    std::cout << "Point 1 is on Oz: "
+    std::cout << "Точка 1 лежит на оси Oz: "
         << point1.isOnOz() << "\n";
 
-    std::cout << "Point 1 octant: "
+    std::cout << "Октант точки 1: "
         << point1.getOctant() << "\n";
 
-    std::cout << "Symmetric to origin: "
+    std::cout << "Точки симметричны относительно начала координат: "
         << point1.isSymmetricToOrigin(point2) << "\n";
+
     Point point3(4, 4, -5);
     Point point4(3, -4, 5);
     Point point5(-3, 4, 5);
 
-    std::cout << "Symmetric to XOY: "
+    std::cout << "Точки симметричны относительно плоскости XOY: "
         << point1.isSymmetricToXOY(point3) << "\n";
 
-    std::cout << "Symmetric to XOZ: "
+    std::cout << "Точки симметричны относительно плоскости XOZ: "
         << point1.isSymmetricToXOZ(point4) << "\n";
 
-    std::cout << "Symmetric to YOZ: "
+    std::cout << "Точки симметричны относительно плоскости YOZ: "
         << point1.isSymmetricToYOZ(point5) << "\n";
 
-    std::cout << "Distance from origin: "
+    std::cout << "\nРасстояние от точки 1 до начала координат: "
         << point1.getDistanceFromOrigin() << "\n";
 
     Point point6(3, 4, 5);
 
     std::cout << "\n";
 
-    std::cout << "Point 1 == Point 6: "
+    std::cout << "Точка 1 равна точке 6: "
         << (point1 == point6) << "\n";
 
     Point point7 = point1 * 2;
 
-    std::cout << "Point 1 * 2: ";
+    std::cout << "Умножение координат точки 1 на 2: ";
     point7.output();
 
-    std::cout << "\n";
+    std::cout << "\n\n";
 
-    std::cout << "Distance to Ox: "
+    std::cout << "Расстояние от точки 1 до оси Ox: "
         << point1.getDistanceToOx() << "\n";
 
-    std::cout << "Distance to Oy: "
+    std::cout << "Расстояние от точки 1 до оси Oy: "
         << point1.getDistanceToOy() << "\n";
 
-    std::cout << "Distance to Oz: "
+    std::cout << "Расстояние от точки 1 до оси Oz: "
         << point1.getDistanceToOz() << "\n";
+    std::cout << "\n(1 - истинно, 0 - ложь)  \n";
 
     return 0;
 }
