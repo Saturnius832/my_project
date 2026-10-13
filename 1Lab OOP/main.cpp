@@ -74,6 +74,16 @@ int main()
 
     std::cout << "Расстояние от точки 1 до оси Oz: "
         << point1.getDistanceToOz() << "\n";
+
+    Point a(0, 0, 0);
+    Point b(4, 0, 0);
+    Point c(0, 3, 0);
+
+    std::cout << "\nТочки образуют треугольник: "
+        << a.formsTriangle(b, c) << "\n";
+
+    std::cout << "Площадь треугольника: "
+        << a.getTriangleArea(b, c) << "\n";
     std::cout << "\n(1 - истинно, 0 - ложь)  \n";
 
     return 0;

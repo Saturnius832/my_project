@@ -113,7 +113,7 @@ bool Point::isSymmetricToYOZ(const Point& point) const
 
 double Point::getDistanceFromOrigin() const
 {
-    return std::sqrt(x_ * x_ + y_ * y_ + z_ * z_); //базовая формула: корень x^2 + y^2 + z^2
+    return std::sqrt((x_ * x_) + (y_ * y_) + (z_ * z_)); //базовая формула: корень x^2 + y^2 + z^2
 }
 
 bool Point::operator==(const Point& point) const // определеяем как, две точки сравнивать
@@ -143,4 +143,39 @@ double Point::getDistanceToOy() const
 double Point::getDistanceToOz() const
 {
     return std::sqrt(x_ * x_ + y_ * y_);
+} 
+
+bool Point::formsTriangle(const Point& point2, const Point& point3) const //возвращает true(1) если треугольник сущ. , false(0) если не сущ.
+{    
+    //нахождение разницы координат
+    double ax = point2.x_ - x_;
+    double ay = point2.y_ - y_;
+    double az = point2.z_ - z_;
+
+    double bx = point3.x_ - x_;
+    double by = point3.y_ - y_;
+    double bz = point3.z_ - z_;
+
+    double cx = ay * bz - az * by;
+    double cy = az * bx - ax * bz;
+    double cz = ax * by - ay * bx;
+
+    return cx * cx + cy * cy + cz * cz > 0;
+}
+
+double Point::getTriangleArea(const Point& point2, const Point& point3) const //вычисление площади
+{
+    double ax = point2.x_ - x_;
+    double ay = point2.y_ - y_;
+    double az = point2.z_ - z_;
+
+    double bx = point3.x_ - x_;
+    double by = point3.y_ - y_;
+    double bz = point3.z_ - z_;
+
+    double cx = ay * bz - az * by;
+    double cy = az * bx - ax * bz;
+    double cz = ax * by - ay * bx;
+
+    return 0.5 * std::sqrt(cx * cx + cy * cy + cz * cz);
 }

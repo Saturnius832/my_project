@@ -35,11 +35,14 @@ public: //открытая часть класса
     double getDistanceToOx() const;
     double getDistanceToOy() const;
     double getDistanceToOz() const;
+    bool formsTriangle(const Point& point2, const Point& point3) const; // Проверка, образуют ли три точки треугольник
+    double getTriangleArea(const Point& point2, const Point& point3) const;   // Нахождение площади треугольника
 
 private: //закрытая часть класса
     double x_;
     double y_;
     double z_;
+
 };
 
 #endif
