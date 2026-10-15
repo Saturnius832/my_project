@@ -106,3 +106,29 @@ std::vector<int> findAllOccurrences(const std::string& text,
 
     return result;
 }
+
+std::vector<int> findAllOccurrences(const std::string& text,
+    const std::string& pattern, int startIndex, int endIndex)
+{
+    std::vector<int> result;
+
+    int textLength = static_cast<int>(text.length());
+
+    if (pattern.empty() || startIndex < 0 ||
+        endIndex < startIndex || startIndex >= textLength)
+        return result;
+
+    if (endIndex >= textLength)
+        endIndex = textLength - 1;
+
+    std::string searchText =
+        text.substr(startIndex, endIndex - startIndex + 1);
+
+    result = findAllOccurrences(searchText, pattern);
+
+    for (int& index : result)
+        index += startIndex;
+
+    return result;
+}
+

@@ -26,23 +26,30 @@ int main()
     setlocale(LC_ALL, "Rus");
     std::string text;
     std::string pattern;
-
     std::cout << "Введите текст: ";
     std::getline(std::cin, text);
 
     std::cout << "Введите подстроку: ";
     std::getline(std::cin, pattern);
+    std::vector<int> rangeIndexes =
+        findAllOccurrences(text, pattern, 28, 36);
+
+    std::cout << "Все вхождения в диапазоне: ";
+    printIndexes(rangeIndexes);
+
 
     int firstIndex = findFirstOccurrence(text, pattern);
 
     std::cout << "Первое вхождение: "
         << firstIndex << std::endl;
+   
 
-    std::vector<int> indexes =
-        findAllOccurrences(text, pattern);
+    std::vector<int> indexes = findAllOccurrences(text, pattern);
+
 
     std::cout << "Все вхождения: ";
     printIndexes(indexes);
+
 
     return 0;
 }

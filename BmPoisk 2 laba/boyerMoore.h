@@ -9,7 +9,12 @@ std::vector<int> makeShiftTable(const std::string& pattern);
 int findFirstOccurrence(const std::string& text,
 	const std::string& pattern);
 
+
 std::vector<int> findAllOccurrences(const std::string& text,
-	const std::string& pattern);
+    const std::string& pattern);
+
+std::vector<int> findAllOccurrences(const std::string& text,
+    const std::string& pattern, int startIndex, int endIndex);
+
 
 #endif
