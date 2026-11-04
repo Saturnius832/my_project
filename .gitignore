@@ -429,3 +429,5 @@ FodyWeavers.xsd
 *.msp
 *.vcxproj
 *.vcxproj.filters
+/Komivoazher
+/MP
