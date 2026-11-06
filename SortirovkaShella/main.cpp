@@ -26,7 +26,7 @@ void perevorotGaps(vector<int>& gaps) {
         right--;
     }
 }
-
+// Алгоритм Шелла
 void shellSort(vector<int>& a) {
     int n = static_cast<int>(a.size());
 
@@ -215,7 +215,7 @@ double measureAverageTime(const vector<int>& originalArr,
         auto end = chrono::high_resolution_clock::now();
 
         if (!ProverkaSorted(tempArr)) {
-            cout << "Ошибка сортировки!" << endl;
+            cout << "?????? ??????????!" << endl;
         }
 
         chrono::duration<double, milli> duration = end - start;
@@ -238,15 +238,15 @@ int main() {
         {"array_1000000_10.txt", "array_1000000_1000.txt", "array_1000000_100000.txt"}
     };
 
-    // Генерация массивов
+
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             ifstream check(filenames[i][j]);
 
             if (!check) {
-                generateAndSaveArray(
-                    sizes[i], minVals[j], maxVals[j], filenames[i][j]
-                );
+                cout << "Нет файла: " << filenames[i][j] << endl;
+                return 1;
+                
             }
 
             check.close();
