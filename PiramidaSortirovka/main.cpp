@@ -60,6 +60,53 @@ void heapSort(vector<int>& array) {
         siftDown(array, i, 0);
     }
 }
+// Чтение массива из файла
+vector<int> loadArrayFromFile(const string& filename, int size) {
+    ifstream file(filename);
+
+    if (!file.is_open()) {
+        throw runtime_error("Не удалось открыть файл: " + filename);
+    }
+
+    vector<int> array(size);
+
+    for (int i = 0; i < size; i++) {
+        if (!(file >> array[i])) {
+            throw runtime_error("Ошибка чтения файла: " + filename);
+        }
+    }
+
+    return array;
+}
+
+// Вычисление среднего времени трех запусков сортировки
+double measureAverageTime(
+    const vector<int>& originalArray,
+    void (*sortFunction)(vector<int>&)
+) {
+    double totalTime = 0;
+
+    for (int run = 0; run < 3; run++) {
+        vector<int> temporaryArray = originalArray;
+
+        auto start = chrono::steady_clock::now();
+
+        sortFunction(temporaryArray);
+
+        auto end = chrono::steady_clock::now();
+
+        chrono::duration<double, milli> duration = end - start;
+
+        totalTime += duration.count();
+
+        // Проверяем результат после каждого запуска
+        if (!isSorted(temporaryArray)) {
+            throw runtime_error("Ошибка сортировки массива!");
+        }
+    }
+
+    return totalTime / 3.0;
+}
 
 int main() {
     return 0;
