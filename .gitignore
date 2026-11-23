@@ -434,3 +434,8 @@ FodyWeavers.xsd
 array_*.txt
 report.csv
 
+/sortirovkaHoarra/reportQuickSort.csv
+/PiramidaSortirovka/client
+/PiramidaSortirovka/tests
+/sortirovkaHoara
+/sortirovkaHoarra/sortirovkaHoarra.sln
