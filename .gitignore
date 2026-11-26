@@ -439,3 +439,6 @@ report.csv
 /PiramidaSortirovka/tests
 /sortirovkaHoara
 /sortirovkaHoarra/sortirovkaHoarra.sln
+*.sln
+/sortirovkaHoarra/reportBitwise.csv
+/PobitovayaSortirovka/PobitovayaSortirovka/reportBitwise.csv
