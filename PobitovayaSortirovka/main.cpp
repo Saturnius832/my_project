@@ -1,5 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include <fstream>
+#include <iomanip>
+#include <string>
+#include <stdexcept>
 #include <utility>
 #include <cstdint>
 
@@ -71,16 +76,72 @@ void bitwiseSort(vector<int>& array) {
     bitwiseSortPart(array, 0, static_cast<int>(array.size()) - 1, highestBit);
 }
 
-int main() {
-    vector<int> array = { 6, 3, 12, 1, 9, 4, 14, 7 };
+// Загрузка массива из файла
+vector<int> loadArrayFromFile(const string& filename, int size) {
+    ifstream file(filename);
 
-    bitwiseSort(array);
-
-    for (int number : array) {
-        cout << number << " ";
+    if (!file.is_open()) {
+        throw runtime_error("Не удалось открыть файл: " + filename);
     }
 
-    cout << endl;
+    vector<int> array(size);
+
+    for (int i = 0; i < size; i++) {
+        if (!(file >> array[i])) {
+            throw runtime_error("Ошибка чтения файла: " + filename);
+        }
+    }
+
+    return array;
+}
+
+// Измерение среднего времени трех запусков
+double measureAverageTime(const vector<int>& originalArray) {
+    double totalTime = 0.0;
+
+    for (int run = 0; run < 3; run++) {
+        vector<int> temporaryArray = originalArray;
+
+        auto start = chrono::steady_clock::now();
+
+        bitwiseSort(temporaryArray);
+
+        auto end = chrono::steady_clock::now();
+
+        chrono::duration<double, milli> duration = end - start;
+
+        totalTime += duration.count();
+
+        if (!isSorted(temporaryArray)) {
+            throw runtime_error("Ошибка побитовой сортировки!");
+        }
+    }
+
+    return totalTime / 3.0;
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    try {
+        int size = 10000;
+
+        vector<int> currentArray = loadArrayFromFile(
+            "array_10000_10.txt",
+            size
+        );
+
+        double averageTime = measureAverageTime(currentArray);
+
+        cout << fixed << setprecision(3);
+
+        cout << "Размер массива: " << size << endl;
+        cout << "Среднее время сортировки: " << averageTime << " мс" << endl;
+    }
+    catch (const exception& error) {
+        cerr << "\nОшибка: " << error.what() << endl;
+        return 1;
+    }
 
     return 0;
 }
